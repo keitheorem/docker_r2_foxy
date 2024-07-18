@@ -1,0 +1,30 @@
+services:
+  development:
+    image: r2_foxy
+    
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp  # or rmw_cyclonedds_cpp
+      - ROS_DOMAIN_ID=0  # Use the same domain ID
+    
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /home/keitheorem/torch:/home/keitheorem/torch
+    
+    user: "keitheorem"
+    
+    network_mode: host
+    stdin_open: true   # Equivalent to -i (interactive mode)
+    tty: true          # Equivalent to -t (TTY)
+
+    deploy:
+      resources:
+        reservations: 
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu] 
+
+    working_dir: /home/keitheorem/ros2_ws  # Set the working directory
+

@@ -1,4 +1,4 @@
-# Start from the ROS 2 Humble desktop full image
+# Start from the ROS2 Foxy desktop full image
 FROM osrf/ros:foxy-desktop
 
 # Configure GUI
